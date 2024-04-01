@@ -1,0 +1,77 @@
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        min_idx = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+    left_half = merge_sort(left_half)
+    right_half = merge_sort(right_half)
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    merged = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            j += 1
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    return merged
+
+# Nhập dãy số nguyên
+n = int(input("Nhập số lượng số nguyên: "))
+arr = []
+for i in range(n):
+    num = int(input("Nhập số nguyên thứ {}: ".format(i + 1)))
+    arr.append(num)
+
+# Chọn thuật toán sắp xếp
+print("Chọn thuật toán sắp xếp:")
+print("1. Insertion Sort")
+print("2. Selection Sort")
+print("3. Bubble Sort")
+print("4. Merge Sort")
+choice = int(input("Nhập lựa chọn của bạn: "))
+
+if choice == 1:
+    insertion_sort(arr)
+elif choice == 2:
+    selection_sort(arr)
+elif choice == 3:
+    bubble_sort(arr)
+elif choice == 4:
+    arr = merge_sort(arr)
+else:
+    print("Lựa chọn không hợp lệ.")
+
+# In dãy số nguyên sau khi sắp xếp
+print("Dãy số nguyên sau khi sắp xếp:")
+print(arr)
