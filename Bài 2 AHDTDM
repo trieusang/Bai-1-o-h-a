@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <math.h>
+
+int kiem_tra_so_chinh_phuong(int num) {
+    int sqrt_num = sqrt(num);
+    return sqrt_num * sqrt_num == num;
+}
+
+int dem_so_chinh_phuong(int n) {
+    int count = 0;
+    for (int num = 1; num < n; num++) {
+        if (kiem_tra_so_chinh_phuong(num)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+void in_so_chinh_phuong(int n) {
+    for (int num = 1; num < n; num++) {
+        if (kiem_tra_so_chinh_phuong(num)) {
+            printf("%d ", num);
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Nhap so nguyen duong n: ");
+    scanf("%d", &n);
+
+    printf("Cac so chinh phuong nho hon %d la: ", n);
+    in_so_chinh_phuong(n);
+
+    int count = dem_so_chinh_phuong(n);
+    printf("So chinh phuong nho hon %d la: %d\n", n, count);
+
+    return 0;
+}
